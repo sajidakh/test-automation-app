@@ -1,0 +1,175 @@
+from __future__ import annotations
+
+import sys
+import json
+import uuid
+from datetime import datetime, timezone
+from typing import Any, Iterable, List, Optional
+
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic_settings import BaseSettings
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.types import ASGIApp, Receive, Scope, Send
+
+# ---------------------------
+# Settings (env-driven)
+# ---------------------------
+
+class Settings(BaseSettings):
+    PF_ENV: str = "dev"
+    PF_API_KEY: Optional[str] = None
+    PF_CORS_ORIGINS: Optional[str | List[str]] = None
+    PF_RATE_PER_MINUTE: str = "60/minute"
+
+settings = Settings()  # reads from environment
+
+# ---------------------------
+# JSON logger (stderr)
+# ---------------------------
+
+def _iso_now() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
+
+def log_api(event: str, /, **kv: Any) -> None:
+    payload = {"level": "INFO", "logger": "api", "message": event, "time": _iso_now()}
+    payload.update(kv)
+    sys.stderr.write(json.dumps(payload) + "\n")
+    sys.stderr.flush()
+
+# ---------------------------
+# App + Rate limiting
+# ---------------------------
+
+limiter = Limiter(key_func=get_remote_address)
+app = FastAPI()
+app.state.limiter = limiter
+
+@app.exception_handler(RateLimitExceeded)
+def ratelimit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+    rid = getattr(request.state, "request_id", None)
+    return JSONResponse(
+        status_code=429,
+        content={"ok": False, "error": {"code": "rate_limited", "type": "RateLimitExceeded", "message": str(exc), "request_id": rid}, "request_id": rid},
+    )
+
+# ---------------------------
+# Request ID + JSON access logs
+# ---------------------------
+
+class RequestContextMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        # request id from header or generate
+        rid = request.headers.get("x-request-id") or str(uuid.uuid4())
+        request.state.request_id = rid
+
+        log_api("request_start", request_id=rid, path=str(request.url.path), method=request.method)
+        try:
+            response = await call_next(request)
+        except Exception as exc:
+            # Fallback to our global exception shape
+            response = JSONResponse(
+                status_code=500,
+                content={
+                    "ok": False,
+                    "error": {
+                        "code": "internal_error",
+                        "type": exc.__class__.__name__,
+                        "message": str(exc),
+                        "request_id": rid,
+                    },
+                    "request_id": rid,
+                },
+            )
+        # echo request id
+        response.headers["x-request-id"] = rid
+        log_api("request_end", request_id=rid, path=str(request.url.path), status=response.status_code)
+        return response
+
+app.add_middleware(RequestContextMiddleware)
+
+# ---------------------------
+# Strict error envelope (for all uncaught errors)
+# ---------------------------
+
+@app.exception_handler(Exception)
+async def unhandled_error(request: Request, exc: Exception) -> JSONResponse:
+    rid = getattr(request.state, "request_id", None)
+    return JSONResponse(
+        status_code=500,
+        content={
+            "ok": False,
+            "error": {
+                "code": "internal_error",
+                "type": exc.__class__.__name__,
+                "message": str(exc),
+                "request_id": rid,
+            },
+            "request_id": rid,
+        },
+    )
+
+# ---------------------------
+# API-key dependency
+# ---------------------------
+
+def require_api_key(x_api_key: Optional[str] = Header(default=None, alias="x-api-key")) -> None:
+    expected = settings.PF_API_KEY
+    if not expected or x_api_key != expected:
+        raise HTTPException(status_code=401, detail="unauthorized")
+
+# ---------------------------
+# Health
+# ---------------------------
+
+@app.get("/health")
+@limiter.limit(lambda: settings.PF_RATE_PER_MINUTE)
+def health(request: Request) -> dict:
+    return {"ok": True}
+
+# ---------------------------
+# Projects (used by tests)
+# ---------------------------
+
+@app.get("/projects", dependencies=[Depends(require_api_key)])
+def projects(_: Request) -> dict:
+    items = [
+        {"id": "p1", "name": "Demo Project A"},
+        {"id": "p2", "name": "Demo Project B"},
+    ]
+    return {"count": len(items), "items": items}
+
+# ---------------------------
+# CORS – strict by default, permissive only if no origins and not prod
+# ---------------------------
+
+def _normalize(origins: Optional[str | Iterable[str]]) -> List[str]:
+    if origins is None:
+        return []
+    if isinstance(origins, str):
+        return [s.strip() for s in origins.split(",") if s.strip()]
+    return [str(x).strip() for x in origins if str(x).strip()]
+
+_allow_list = _normalize(settings.PF_CORS_ORIGINS)
+_allow_any = (settings.PF_ENV.lower() != "prod") and (len(_allow_list) == 0)
+
+# Ensure single CORS layer
+try:
+    app.user_middleware = [m for m in app.user_middleware if m.cls is not CORSMiddleware]
+    app.middleware_stack = app.build_middleware_stack()
+except Exception:
+    pass
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=([] if _allow_any else _allow_list),
+    allow_origin_regex=(".*" if _allow_any else None),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["x-request-id"],
+)

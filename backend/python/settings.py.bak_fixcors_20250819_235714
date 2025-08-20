@@ -1,0 +1,77 @@
+from __future__ import annotations
+
+import json
+import os
+from typing import List  # noqa: F401  (kept for legacy imports elsewhere)
+
+from dotenv import load_dotenv
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Dev default: support localhost via both hosts (works in browsers, CI, Playwright)
+DEV_DEFAULT_CORS = ["http://127.0.0.1:5173", "http://localhost:5173"]
+
+
+def _parse_origins(val: str | list[str] | None) -> list[str]:
+    """
+    Parse PF_CORS_ORIGINS exactly:
+    - JSON list: '["http://a","http://b"]'
+    - simple CSV: 'http://a,http://b'
+    Do NOT auto-add counterparts here; tests expect the env to be used as-is.
+    """
+    if val is None:
+        return DEV_DEFAULT_CORS.copy()
+    if isinstance(val, list):
+        return [str(x).strip() for x in val if str(x).strip()]
+
+    s = val.strip()
+    if s.startswith("["):
+        try:
+            loaded = json.loads(s)
+            if isinstance(loaded, list):
+                return [str(x).strip() for x in loaded if str(x).strip()]
+            return [s]
+        except Exception:
+            # fall back to CSV
+            pass
+    return [p.strip() for p in s.split(",") if p.strip()]
+
+
+class Settings(BaseSettings):
+    # Environment / flags
+    env: str = Field(default="dev", alias="PF_ENV")
+    debug: bool = Field(default=True, alias="PF_DEBUG")
+
+    # API bind
+    api_host: str = Field(default="127.0.0.1", alias="PF_API_HOST")
+    api_port: int = Field(default=int(os.getenv("PORT", "8000")), alias="PF_API_PORT")
+
+    # Security / UI
+    api_key: str | None = Field(default=None, alias="PF_API_KEY")
+    ui_host: str = Field(default="127.0.0.1", alias="PF_UI_HOST")
+    ui_port: int = Field(default=5173, alias="PF_UI_PORT")
+
+    # CORS (allow str | list[str] via env)
+    cors_origins: list[str] = Field(
+        default_factory=lambda: DEV_DEFAULT_CORS.copy(), alias="PF_CORS_ORIGINS"
+    )
+
+    secrets_dir: str | None = Field(default=None, alias="PF_SECRETS_DIR")
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_nested_delimiter="__",
+        extra="ignore",
+    )
+
+
+# Instantiate after loading .env
+load_dotenv()
+settings = Settings()
+
+# Apply env override exactly (JSON list or CSV), else keep dev defaults
+_pf_env = os.getenv("PF_CORS_ORIGINS")
+if _pf_env:
+    settings.cors_origins = _parse_origins(_pf_env)
+else:
+    settings.cors_origins = DEV_DEFAULT_CORS.copy()

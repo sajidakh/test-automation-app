@@ -1,0 +1,35 @@
+$ErrorActionPreference = "Stop"
+
+Import-Module "$PSScriptRoot\common.psm1" -Force
+
+$ROOT   = Get-ProjectRoot $PSScriptRoot
+Import-PFEnv $ROOT
+
+$uiDir  = Join-Root $ROOT "ui"
+
+# DO NOT use $host — PowerShell reserves $Host
+$uiHost = if ($env:PF_UI_HOST) { $env:PF_UI_HOST } else { "127.0.0.1" }
+$base   = if ($env:PF_UI_PORT) { [int]$env:PF_UI_PORT } else { 5173 }
+$port   = $base
+
+# find a free port near $base
+$inUse = { param($p) netstat -ano | Select-String ":$p\s+.*LISTENING" -Quiet }
+while (& $inUse $port) {
+  $port++
+  if ($port -gt ($base + 20)) { throw "Unable to find free UI port near $base" }
+}
+
+# share runtime to both root and backend\node (Electron reads the latter)
+$payload = "{`"ui`":{`"host`":`"$uiHost`",`"port`":$port}}"
+$rtRoot  = Join-Path $ROOT ".pf.runtime.json"
+$rtNode  = Join-Path (Join-Root $ROOT "backend\node") ".pf.runtime.json"
+$payload | Set-Content -Path $rtRoot -Encoding utf8
+$payload | Set-Content -Path $rtNode -Encoding utf8
+
+Push-Location $uiDir
+try {
+  $env:VITE_DEV_HOST = $uiHost
+  $env:VITE_DEV_PORT = "$port"
+  npm run dev -- --host $uiHost --port $port --strictPort
+}
+finally { Pop-Location }

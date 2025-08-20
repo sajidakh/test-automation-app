@@ -1,0 +1,21 @@
+# Portable Electron dev runner; waits for Vite on PF_UI_HOST:PF_UI_PORT
+$ErrorActionPreference = 'Stop'
+
+Import-Module "$PSScriptRoot\common.psm1" -Force
+$ROOT = Get-ProjectRoot $PSScriptRoot
+Import-PFEnv $ROOT
+
+$nodeDir = Join-Root $ROOT 'backend\node'
+$uiHost  = if ($env:PF_UI_HOST) { $env:PF_UI_HOST } else { '127.0.0.1' }
+$uiPort  = if ($env:PF_UI_PORT) { $env:PF_UI_PORT } else { '5173' }
+$url     = "http://$uiHost`:$uiPort"
+
+Push-Location $nodeDir
+try {
+  # Wait for Vite to be up, then run TS watcher + Electron together
+  npx wait-on $url
+  concurrently -k "npm:watch:electron" "npm:start:electron"
+}
+finally {
+  Pop-Location
+}

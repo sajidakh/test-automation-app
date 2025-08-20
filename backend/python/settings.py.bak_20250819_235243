@@ -1,0 +1,21 @@
+settings = Settings()
+
+# Read PF_CORS_ORIGINS exactly if present; support JSON list or simple CSV.
+_pf_env = os.getenv("PF_CORS_ORIGINS")
+if _pf_env:
+    origins: list[str]
+    s = _pf_env.strip()
+    if s.startswith("["):
+        try:
+            import json
+            loaded = json.loads(s)
+            if isinstance(loaded, list):
+                origins = [str(o).strip() for o in loaded if str(o).strip()]
+            else:
+                origins = [s]
+        except Exception:
+            origins = [o.strip() for o in _pf_env.split(",") if o.strip()]
+    else:
+        origins = [o.strip() for o in _pf_env.split(",") if o.strip()]
+    settings.cors_origins = origins
+

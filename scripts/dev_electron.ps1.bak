@@ -1,0 +1,16 @@
+# scripts/dev_electron.ps1
+$ErrorActionPreference = "Stop"
+Import-Module "$PSScriptRoot\common.psm1" -Force
+$ROOT = Get-ProjectRoot $PSScriptRoot
+Import-PFEnv $ROOT
+
+$nodeDir = Join-Root $ROOT "backend\node"
+$rtFile  = Join-Path $ROOT ".pf.runtime.json"
+if (-not (Test-Path $rtFile)) { throw "Runtime file $rtFile not found. Start UI first." }
+
+Push-Location $nodeDir
+try {
+  npm run watch:electron | Out-Null
+  npm run start:electron
+}
+finally { Pop-Location }

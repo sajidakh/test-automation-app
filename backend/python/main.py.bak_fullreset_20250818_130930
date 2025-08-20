@@ -1,0 +1,72 @@
+from __future__ import annotations
+
+import uuid
+from typing import List, Sequence
+
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware import Middleware
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
+
+# Use our settings module (env-driven config)
+from backend.python import settings  # type: ignore[import-not-found]
+
+
+# ---------- CORS CONFIG (pre-app) ----------
+def _normalize(origins: object) -> List[str]:
+    if isinstance(origins, str):
+        return [s.strip() for s in origins.split(",") if s.strip()]
+    if isinstance(origins, (list, tuple, set)):
+        return [str(x).strip() for x in origins if str(x).strip()]
+    return []
+
+_env = (getattr(settings, "PF_ENV", "dev") or "dev").lower()
+_allow_list: List[str] = _normalize(getattr(settings, "PF_CORS_ORIGINS", None))
+# dev/stage default-open only when nothing configured; prod must be explicit
+_allow_any = (_env != "prod") and (len(_allow_list) == 0)
+
+cors_mw = Middleware(
+    CORSMiddleware,
+    allow_origins=([] if _allow_any else _allow_list),
+    allow_origin_regex=(".*" if _allow_any else None),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["x-request-id"],
+)
+
+# ---------- App (middleware wired at construction) ----------
+app = FastAPI(title="Project Forge API", middleware=[cors_mw])
+
+# ---------- Request ID middleware ----------
+@app.middleware("http")
+async def request_id_middleware(request: Request, call_next):
+    rid = request.headers.get("x-request-id") or str(uuid.uuid4())
+    request.state.request_id = rid
+    response = await call_next(request)
+    response.headers["x-request-id"] = rid
+    return response
+
+# ---------- Rate limiting ----------
+# SlowAPI decorator requires a `request` param in the endpoint signature.
+# We keep the per-minute value env-driven with a sane default (60).
+_rate_per_minute = int(getattr(settings, "PF_RATE_PER_MINUTE", 60))
+limiter = Limiter(key_func=get_remote_address, default_limits=[f"{_rate_per_minute}/minute"])
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# ---------- Endpoints ----------
+@limiter.limit(lambda: getattr(settings, "PF_RATE_PER_MINUTE", 60))
+@app.get("/health")
+async def health(request: Request):
+    # Minimal health response; middleware adds x-request-id
+    return {"status": "ok"}
+
+@app.get("/projects")
+async def projects(request: Request):
+    # Placeholder to satisfy tests that may import/use this route
+    return []

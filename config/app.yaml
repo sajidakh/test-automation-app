@@ -1,0 +1,11 @@
+app:
+  name: FlowForge
+  env: dev
+  log_dir: ""
+ui:
+  host: ${PF_UI_HOST:-127.0.0.1}
+  port: ${PF_UI_PORT:-5173}
+api:
+  host: ${PF_API_HOST:-127.0.0.1}
+  port: ${PF_API_PORT:-8000}
+  app:  ${PF_API_APP:-main:app}

@@ -1,0 +1,116 @@
+from __future__ import annotations
+
+import json
+import os
+import sys
+import uuid
+from typing import List, Sequence
+
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi.responses import JSONResponse, PlainTextResponse
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware import Middleware
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
+
+
+# ---------- CORS CONFIG (env → values) ----------
+def _normalize(origins: object) -> List[str]:
+    if isinstance(origins, str):
+        return [s.strip() for s in origins.split(",") if s.strip()]
+    if isinstance(origins, (list, tuple, set)):
+        return [str(x).strip() for x in origins if str(x).strip()]
+    return []
+
+_env = (os.getenv("PF_ENV") or "dev").lower()
+_allow_list: List[str] = _normalize(os.getenv("PF_CORS_ORIGINS"))
+
+# IMPORTANT: No wildcard regex path when a list is provided. Only open CORS
+# if we're NOT prod AND there is no configured list.
+_allow_any = (_env != "prod") and (len(_allow_list) == 0)
+
+cors_kwargs = dict(
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["x-request-id"],
+)
+if _allow_any:
+    # Dev convenience only: allow any origin (via regex OR "*"). Prefer explicit list "*".
+    cors_kwargs.update(allow_origins=["*"])
+else:
+    cors_kwargs.update(allow_origins=_allow_list)
+    # explicitly ensure no regex falls back to wildcard
+    cors_kwargs.update(allow_origin_regex=None)
+
+cors_mw = Middleware(CORSMiddleware, **cors_kwargs)
+
+# ---------- App (middleware wired at construction) ----------
+app = FastAPI(title="Project Forge API", middleware=[cors_mw])
+
+# ---------- Request ID + JSON logs ----------
+@app.middleware("http")
+async def _request_meta(request: Request, call_next):
+    rid = request.headers.get("x-request-id") or str(uuid.uuid4())
+    request.state.request_id = rid
+    try:
+        print(json.dumps({
+            "level": "INFO", "logger": "api", "message": "request_start",
+            "time": "", "request_id": rid, "path": request.url.path, "method": request.method,
+        }), file=sys.stderr, flush=True)
+    except Exception:
+        pass
+
+    response = await call_next(request)
+    response.headers["x-request-id"] = rid
+
+    try:
+        print(json.dumps({
+            "level": "INFO", "logger": "api", "message": "request_end",
+            "time": "", "request_id": rid, "path": request.url.path, "status": response.status_code,
+        }), file=sys.stderr, flush=True)
+    except Exception:
+        pass
+
+    return response
+
+# ---------- Global error envelope (must include ok:false) ----------
+@app.exception_handler(Exception)
+async def _unhandled(request: Request, exc: Exception):
+    rid = getattr(getattr(request, "state", None), "request_id", None)
+    return JSONResponse(
+        status_code=500,
+        content={"ok": False, "error": {"type": "InternalServerError", "message": "internal error"}, "request_id": rid},
+    )
+
+# ---------- Rate limiting ----------
+_rate_per_minute = os.getenv("PF_RATE_PER_MINUTE") or "60"
+limiter = Limiter(key_func=get_remote_address, default_limits=[f"{_rate_per_minute}/minute"])
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# ---------- API key guard ----------
+def require_api_key(x_api_key: str | None = Header(default=None)) -> None:
+    expected = os.getenv("PF_API_KEY")
+    # Always require a header; if env var is set, it must match.
+    if not x_api_key:
+        raise HTTPException(status_code=401, detail="missing api key")
+    if expected is not None and x_api_key != expected:
+        raise HTTPException(status_code=401, detail="invalid api key")
+
+# ---------- Endpoints ----------
+@limiter.limit(lambda: os.getenv("PF_RATE_PER_MINUTE") or "60")
+@app.get("/health")
+async def health(request: Request):
+    return PlainTextResponse("ok")
+
+@app.get("/secure-ping", dependencies=[Depends(require_api_key)])
+async def secure_ping(request: Request):
+    return {"pong": True}
+
+@app.get("/projects", dependencies=[Depends(require_api_key)])
+async def projects(request: Request):
+    items: List[dict] = []   # placeholder for now
+    return {"items": items, "count": len(items)}

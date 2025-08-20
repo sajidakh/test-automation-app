@@ -1,0 +1,36 @@
+{
+  "name": "ff-electron",
+  "private": true,
+  "version": "0.1.0",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently --success=all --kill-others-on-fail -k \"npm:dev:ui\" \"npm:dev:api\" \"npm:dev:electron\"",
+    "dev:ui": "pwsh -ExecutionPolicy Bypass -File ../../scripts/dev_ui.ps1",
+    "dev:api": "pwsh -ExecutionPolicy Bypass -File ../python/run_api.ps1",
+    "dev:electron": "pwsh -ExecutionPolicy Bypass -File ../../scripts/dev_electron.ps1",
+    "watch:electron": "tsc -p tsconfig.electron.json -w",
+    "start:electron": "electron ./dist/main.mjs",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run",
+    "prepare": "husky",
+    "build:electron": "tsc -p tsconfig.electron.json && node -e \"const fs=require('fs'),p=require('path');fs.mkdirSync('dist',{recursive:true});try{fs.copyFileSync(p.join('src','preload.js'),p.join('dist','preload.js'))}catch(e){console.log('[note] no preload.js to copy')}\""
+  },
+  "dependencies": {
+    "electron": "^30.5.1",
+    "react-router-dom": "^7.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.1",
+    "@typescript-eslint/parser": "^8.39.1",
+    "concurrently": "^9.2.0",
+    "eslint": "^8.57.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4",
+    "wait-on": "^8.0.4"
+  }
+}

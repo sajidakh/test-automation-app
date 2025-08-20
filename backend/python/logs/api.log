@@ -1,0 +1,14 @@
+{"level": "INFO", "logger": "uvicorn.error", "message": "Started server process [10520]", "time": "2025-08-17T20:01:13"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Waiting for application startup.", "time": "2025-08-17T20:01:13"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Application startup complete.", "time": "2025-08-17T20:01:13"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Shutting down", "time": "2025-08-17T20:04:25"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Waiting for application shutdown.", "time": "2025-08-17T20:04:25"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Application shutdown complete.", "time": "2025-08-17T20:04:25"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Finished server process [10520]", "time": "2025-08-17T20:04:25"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Started server process [20680]", "time": "2025-08-17T20:04:26"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Waiting for application startup.", "time": "2025-08-17T20:04:26"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Application startup complete.", "time": "2025-08-17T20:04:26"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Shutting down", "time": "2025-08-17T20:07:06"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Waiting for application shutdown.", "time": "2025-08-17T20:07:06"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Application shutdown complete.", "time": "2025-08-17T20:07:06"}
+{"level": "INFO", "logger": "uvicorn.error", "message": "Finished server process [20680]", "time": "2025-08-17T20:07:06"}

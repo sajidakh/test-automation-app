@@ -1,0 +1,22 @@
+﻿Step 2 files written.
+
+NEXT (when you are ready to install and run dev):
+
+1) UI deps:
+   cd "C:\Users\syeda\OneDrive\Documents\Project Forge\TestAutomationApp\ui"
+   npm install
+
+2) Electron deps:
+   cd "C:\Users\syeda\OneDrive\Documents\Project Forge\TestAutomationApp\backend\node"
+   npm install
+
+3) Python venv + API deps:
+   cd "C:\Users\syeda\OneDrive\Documents\Project Forge\TestAutomationApp"
+   python -m venv .venv
+   .\.venv\Scripts\pip install -r .\backend\python\requirements.txt
+
+4) Run everything in dev from Electron folder:
+   cd "C:\Users\syeda\OneDrive\Documents\Project Forge\TestAutomationApp\backend\node"
+   npm run dev
+
+Then open the Electron window and click "Dev Check" to ping the FastAPI /health endpoint.

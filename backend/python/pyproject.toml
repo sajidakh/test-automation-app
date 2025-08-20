@@ -1,0 +1,13 @@
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+extend-select = ["I","UP","B","PL","PLC","PLR","RUF"]
+ignore = ["B904"]  # TEMP while refactoring except blocks
+
+[tool.ruff.lint.per-file-ignores]
+# Tests: allow “magic numbers” for HTTP codes and some dynamic imports
+"backend/python/tests/*" = ["PLR2004","PLC0415","I001"]
+# App spots we’ll clean later
+"backend/python/main.py" = ["PLC0415"]
+"backend/python/observability.py" = ["PLR0913"]
