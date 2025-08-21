@@ -2,7 +2,8 @@
   File: scripts.bak.2plus/validate_structure.ps1
   Purpose: tooling script. Keep commands idempotent and defensive.
   Usage: see scripts\README.md and repo root README for when/how to run.
-#>Write-Host "Validating project structure..." -ForegroundColor Cyan
+#>
+Write-Host "Validating project structure..." -ForegroundColor Cyan
 $expected = @("ui","backend","tests","config","scripts")
 $missing = @()
 foreach ($f in $expected) {
