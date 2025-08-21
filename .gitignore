@@ -18,3 +18,20 @@ Thumbs.db
 # Playwright (later)
 playwright-report/
 test-results/
+
+# node / vite
+node_modules/
+dist/
+ui/node_modules/
+ui/.vite/
+ui/dist/
+
+# python
+backend/python/.venv/
+__pycache__/
+*.pyc
+
+# env & logs
+.env
+backend/python/.env
+*.log
