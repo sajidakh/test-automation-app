@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/app/models/flow.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 from datetime import datetime
 from typing import Any, Literal
@@ -23,3 +27,4 @@ class FlowRunResult(BaseModel):
     status: Literal["succeeded", "failed"]
     duration_ms: int
     output: dict[str, Any]
+

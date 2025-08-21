@@ -1,4 +1,8 @@
-import importlib
+"""
+backend/python/tests/test_cors_strict.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""import importlib
 import sys
 
 from fastapi.testclient import TestClient
@@ -24,4 +28,5 @@ def test_unlisted_origin_is_rejected(monkeypatch):
     })
     assert r.status_code in (200, 204, 400)  # behavior varies by stack/version
     assert r.headers.get("access-control-allow-origin") is None
+
 

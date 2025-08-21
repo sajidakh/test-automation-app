@@ -1,4 +1,8 @@
-param(
+<#
+  File: scripts/smoke.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>param(
   [int]$ApiPort = 8000,
   [int]$UiPort  = 5173
 )
@@ -69,3 +73,4 @@ Print ([int]$r401.StatusCode)
 $r200 = Invoke-WebRequest "http://127.0.0.1:$ApiPort/secure-ping" -Headers @{ 'x-api-key'='k' }
 Print ([int]$r200.StatusCode)
 Print $r200.Content
+

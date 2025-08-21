@@ -1,4 +1,8 @@
-import React from "react";
+/*
+  File: ui/src/App.example.tsx
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import React from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const API_KEY = import.meta.env.VITE_API_KEY || ""; // optional
@@ -41,3 +45,4 @@ export default function App() {
     </div>
   );
 }
+

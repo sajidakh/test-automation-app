@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/app/routers/flows.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
 
@@ -20,4 +24,5 @@ def remove_flow(flow_id: str):
     ok = delete_flow(flow_id)
     if not ok:
         raise HTTPException(status_code=404, detail="Flow not found")
+
 

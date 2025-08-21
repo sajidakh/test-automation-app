@@ -1,4 +1,8 @@
-import { test, expect } from "@playwright/test";
+/*
+  File: ui/tests/buttons.spec.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { test, expect } from "@playwright/test";
 const UI  = process.env.UI_URL  || "http://localhost:5173";
 
 async function clickAndTime(page, testId: string, waitFor: RegExp) {
@@ -34,3 +38,4 @@ test("404 button -> /does-not-exist 404", async ({ page }) => {
   const r = await clickAndTime(page, "btn-404", /\/does-not-exist$/);
   expect(r.status).toBe(404);
 });
+

@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/logging_setup.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 import json
 import logging
@@ -66,3 +70,4 @@ def config() -> None:
             },
         }
     )
+

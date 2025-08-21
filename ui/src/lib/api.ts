@@ -1,4 +1,8 @@
-export const API_BASE = "http://127.0.0.1:8000";
+/*
+  File: ui/src/lib/api.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/export const API_BASE = "http://127.0.0.1:8000";
 
 function rid() {
   return `ui-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
@@ -19,3 +23,4 @@ export const apiPing = () => apiGet("/health");
 export const apiSecurePing = (key?: string) => apiGet("/secure-ping", key);
 export const apiBoom = () => apiGet("/boom");
 export const apiProjects = (key?: string) => apiGet("/projects", key);
+

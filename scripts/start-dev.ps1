@@ -1,4 +1,8 @@
-param([int]$ApiPort=8000,[int]$UiPort=5173,[string]$ApiKey="k")
+<#
+  File: scripts/start-dev.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>param([int]$ApiPort=8000,[int]$UiPort=5173,[string]$ApiKey="k")
 
 function Kill-Port { param([int]$Port)
   $pids = Get-NetTCPConnection -State Listen -LocalPort $Port -ErrorAction SilentlyContinue |
@@ -66,3 +70,4 @@ $uiProc = Start-Process powershell -PassThru -ArgumentList @('-NoLogo','-NoProfi
 Write-Host "`nBackend PID: $($apiProc.Id)  -> http://localhost:$ApiPort"
 Write-Host "Frontend PID: $($uiProc.Id) -> http://localhost:$UiPort"
 Write-Host "Use scripts\smoke.ps1 to validate."
+

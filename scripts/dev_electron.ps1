@@ -1,4 +1,8 @@
-$ErrorActionPreference = "Stop"
+<#
+  File: scripts/dev_electron.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>$ErrorActionPreference = "Stop"
 $root   = Split-Path $PSScriptRoot -Parent
 $portFile = Join-Path $root ".ff_ui_port"
 $uiPort = 5173
@@ -24,3 +28,4 @@ Push-Location (Join-Path $root "backend\node")
 try {
   npm run start:electron
 } finally { Pop-Location }
+

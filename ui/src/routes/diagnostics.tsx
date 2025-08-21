@@ -1,4 +1,8 @@
-import { useState } from "react";
+/*
+  File: ui/src/routes/diagnostics.tsx
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { useState } from "react";
 import { apiPing, apiSecurePing, apiBoom, apiProjects } from "../lib/api";
 
 export default function Diagnostics() {
@@ -47,3 +51,4 @@ export default function Diagnostics() {
     </div>
   );
 }
+

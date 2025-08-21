@@ -1,4 +1,8 @@
-from backend.python.main import app as the_app
+"""
+backend/python/tests/test_errors.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from backend.python.main import app as the_app
 from fastapi import Request
 from fastapi.testclient import TestClient
 
@@ -15,4 +19,5 @@ def test_error_envelope_shape():
     assert body.get("ok") is False
     assert body.get("error", {}).get("code") == "internal_error"
     assert body.get("error", {}).get("request_id") == "xyz"
+
 

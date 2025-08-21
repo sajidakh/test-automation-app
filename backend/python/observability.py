@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/observability.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 import json
 import sys
@@ -89,3 +93,4 @@ def install_error_handlers(app):
             message=str(exc),
             err_type=exc.__class__.__name__,
         )
+

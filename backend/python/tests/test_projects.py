@@ -1,4 +1,8 @@
-from fastapi.testclient import TestClient
+"""
+backend/python/tests/test_projects.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from fastapi.testclient import TestClient
 from main import app
 
 
@@ -19,6 +23,7 @@ def test_projects_ok_with_key(monkeypatch):
     data = r.json()
     assert "items" in data and isinstance(data["items"], list)
     assert data["count"] == len(data["items"])
+
 
 
 

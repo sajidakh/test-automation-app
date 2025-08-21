@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/settings.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 import json
 import os
@@ -76,3 +80,4 @@ else:
     if "http://127.0.0.1:5173" in s:
         s.add("http://localhost:5173")
     settings.cors_origins = sorted(s)
+

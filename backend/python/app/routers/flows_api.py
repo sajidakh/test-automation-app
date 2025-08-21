@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/app/routers/flows_api.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
 
@@ -21,4 +25,5 @@ def post_run_flow(flow_id: str, body: RunRequest | None = None) -> FlowRunResult
         return run_flow(flow_id, body)
     except KeyError:
         raise HTTPException(status_code=404, detail="Flow not found")
+
 

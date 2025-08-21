@@ -1,4 +1,8 @@
-# scripts/dev_electron.ps1
+<#
+  File: scripts.bak.2plus/dev_electron.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#># scripts/dev_electron.ps1
 $ErrorActionPreference = 'Stop'
 Import-Module "$PSScriptRoot\common.psm1" -Force
 
@@ -41,3 +45,4 @@ try {
 finally {
   Pop-Location
 }
+

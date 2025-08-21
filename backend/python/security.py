@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/security.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 from fastapi import Header, HTTPException, Request
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -22,4 +26,5 @@ async def require_api_key(x_api_key: str | None = Header(default=None)):
     s = get_settings()
     if s.api_key and x_api_key != s.api_key:
         raise HTTPException(status_code=401, detail="invalid api key")
+
 

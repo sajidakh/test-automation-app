@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/app/services/flow_service.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 import time
 import uuid
@@ -32,4 +36,5 @@ def run_flow(flow_id: str, req: RunRequest | None = None) -> FlowRunResult:
         duration_ms=dt_ms,
         output={"echo": payload or {}, "message": "flow executed"}
     )
+
 

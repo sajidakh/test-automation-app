@@ -1,4 +1,8 @@
-$ErrorActionPreference = "Stop"
+<#
+  File: scripts/dev_ui.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>$ErrorActionPreference = "Stop"
 $root   = Split-Path $PSScriptRoot -Parent     # -> C:\Project Forge\TestAutomationApp
 $uiDir  = Join-Path $root "ui"
 $portFile = Join-Path $root ".ff_ui_port"
@@ -19,3 +23,4 @@ Push-Location $uiDir
 try {
   npm run dev -- --host 127.0.0.1 --port $port --strictPort
 } finally { Pop-Location }
+

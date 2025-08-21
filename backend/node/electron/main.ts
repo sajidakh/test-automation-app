@@ -1,4 +1,8 @@
-import { app, BrowserWindow } from "electron";
+/*
+  File: backend/node/electron/main.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { app, BrowserWindow } from "electron";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -36,3 +40,4 @@ function createWindow() {
 app.whenReady().then(createWindow);
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });
 app.on("activate", () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
+

@@ -1,4 +1,8 @@
-param(
+<#
+  File: scripts/scripts/start-dev.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>param(
   [int]$ApiPort = 8000,
   [int]$UiPort  = 5173,
   [string]$ApiKey = "k"  # '' if not needed
@@ -52,3 +56,4 @@ $uiProc = Start-Process powershell -PassThru -ArgumentList @('-NoLogo','-NoProfi
 "`nBackend PID: $($apiProc.Id)  -> http://localhost:$ApiPort"
 "Frontend PID: $($uiProc.Id) -> http://localhost:$UiPort"
 "Use scripts\smoke.ps1 to validate."
+

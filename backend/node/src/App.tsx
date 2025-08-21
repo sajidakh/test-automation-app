@@ -1,4 +1,8 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+/*
+  File: backend/node/src/App.tsx
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Diagnostics from "./pages/Diagnostics";
 
 function Home() {
@@ -25,3 +29,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

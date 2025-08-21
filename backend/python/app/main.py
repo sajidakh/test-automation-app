@@ -1,4 +1,8 @@
-# backend/python/app/main.py
+"""
+backend/python/app/main.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""# backend/python/app/main.py
 from fastapi import FastAPI
 
 app = FastAPI(title="FlowForge API")
@@ -6,3 +10,4 @@ app = FastAPI(title="FlowForge API")
 @app.get("/health")
 def health():
     return {"ok": True, "service": "api", "ver": "0.1.0"}
+

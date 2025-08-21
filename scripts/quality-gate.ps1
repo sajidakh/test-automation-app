@@ -1,4 +1,8 @@
-param([switch]$Fix)
+<#
+  File: scripts/quality-gate.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>param([switch]$Fix)
 
 Set-Location "C:\Project Forge\TestAutomationApp"
 
@@ -27,3 +31,4 @@ if ($LASTEXITCODE -ne 0) { $ok = $false }
 
 if ($ok) { Write-Host "`n✅ QUALITY GATE PASSED" -ForegroundColor Green; exit 0 }
 else     { Write-Host "`n❌ QUALITY GATE FAILED" -ForegroundColor Red;   exit 1 }
+

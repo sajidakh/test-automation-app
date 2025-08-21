@@ -1,4 +1,8 @@
-import pytest
+"""
+backend/python/tests/test_live_api.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""import pytest
 
 import httpx
 
@@ -29,4 +33,5 @@ def test_live_flows_create_and_run(run_api):
     j = r.json()
     assert j["status"] == "succeeded"
     assert "duration_ms" in j and j["duration_ms"] >= 0
+
 

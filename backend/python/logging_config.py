@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/logging_config.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 import json
 import logging
@@ -53,3 +57,4 @@ def get_logger(name: str, request_id: str | None = None) -> logging.Logger:
         # attach request_id to each record
         return logging.LoggerAdapter(base, {"request_id": request_id})  # type: ignore[return-value]
     return base
+

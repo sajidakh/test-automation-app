@@ -1,4 +1,8 @@
-﻿Write-Host "Validating project structure..." -ForegroundColor Cyan
+<#
+  File: scripts/validate_structure.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>Write-Host "Validating project structure..." -ForegroundColor Cyan
 $expected = @("ui","backend","tests","config","scripts")
 $missing = @()
 foreach ($f in $expected) {
@@ -11,3 +15,4 @@ if ($missing.Count -eq 0) {
   Write-Host ("Missing folders: " + ($missing -join ", ")) -ForegroundColor Red
   exit 1
 }
+

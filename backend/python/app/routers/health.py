@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/app/routers/health.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 import platform
 from datetime import datetime
@@ -17,4 +21,5 @@ def health() -> dict:
         "python": platform.python_version(),
         "platform": platform.platform(),
     }
+
 

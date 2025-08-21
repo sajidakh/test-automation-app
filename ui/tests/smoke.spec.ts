@@ -1,4 +1,8 @@
-import { test, expect, request } from "@playwright/test";
+/*
+  File: ui/tests/smoke.spec.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { test, expect, request } from "@playwright/test";
 
 const UI  = process.env.UI_URL  || "http://localhost:5173";
 const API = process.env.API_URL || "http://localhost:8000";
@@ -14,3 +18,4 @@ test("API /health ok", async () => {
   expect(res.status()).toBeLessThan(300);
   expect((await res.text()).trim()).toBe("ok");
 });
+

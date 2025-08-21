@@ -1,4 +1,8 @@
-# backend/python/run_api.ps1
+<#
+  File: backend/python/run_api.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#># backend/python/run_api.ps1
 $ErrorActionPreference = "Stop"
 Import-Module "$PSScriptRoot\..\..\scripts\common.psm1" -Force
 
@@ -20,3 +24,4 @@ try {
   & $pyExe -m uvicorn $appSpec --host $apiHost --port $apiPort --reload
 }
 finally { Pop-Location }
+

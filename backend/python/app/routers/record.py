@@ -1,4 +1,8 @@
-from __future__ import annotations
+"""
+backend/python/app/routers/record.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""from __future__ import annotations
 
 from uuid import UUID
 
@@ -16,4 +20,5 @@ def record_start(req: RecordStartRequest) -> dict:
 @router.post("/stop/{session_id}")
 def record_stop(session_id: UUID) -> dict:
     return stop_session(session_id)
+
 

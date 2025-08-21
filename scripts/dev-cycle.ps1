@@ -1,4 +1,8 @@
-#requires -PSEdition Core
+<#
+  File: scripts/dev-cycle.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#>#requires -PSEdition Core
 param(
   [switch]$RunUiSmoke,
   [switch]$RunUiE2E
@@ -42,3 +46,4 @@ if ($RunUiE2E) {
 }
 
 Write-Host "`n=== DEV CYCLE COMPLETE ===" -ForegroundColor Cyan
+

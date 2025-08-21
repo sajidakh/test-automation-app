@@ -1,4 +1,8 @@
-import { defineConfig } from "@playwright/test";
+/*
+  File: ui/playwright.config.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   timeout: 35_000,
@@ -10,3 +14,4 @@ export default defineConfig({
     video: "retain-on-failure",
   },
 });
+

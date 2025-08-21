@@ -1,7 +1,12 @@
-﻿import { describe, it, expect } from 'vitest';
+/*
+  File: backend/node/src/main.test.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { describe, it, expect } from 'vitest';
 
 describe('Security Baseline', () => {
     it('should pass sanity check', () => {
         expect(1 + 1).toBe(2);
     });
 });
+

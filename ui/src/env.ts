@@ -1,4 +1,8 @@
-﻿// ui/src/env.ts
+/*
+  File: ui/src/env.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/// ui/src/env.ts
 export function apiBase(): string {
     const viteEnv = (import.meta as any)?.env?.VITE_API_BASE as string | undefined;
     const injected =
@@ -10,3 +14,4 @@ export function apiBase(): string {
 
     return (viteEnv?.trim() || injected?.trim() || "http://127.0.0.1:8000");
 }
+

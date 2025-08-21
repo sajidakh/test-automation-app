@@ -1,4 +1,8 @@
-import { defineConfig } from "vite";
+/*
+  File: ui/vite.config.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
@@ -9,5 +13,6 @@ export default defineConfig({
         strictPort: true
     }
 });
+
 
 

@@ -1,4 +1,8 @@
-import React from "react";
+/*
+  File: ui/src/main.tsx
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 
@@ -12,3 +16,4 @@ createRoot(el).render(
     <App />
   </React.StrictMode>
 );
+

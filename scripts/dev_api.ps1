@@ -1,4 +1,8 @@
-# Thin wrapper to launch the FastAPI dev server via backend/python/run_api.ps1
+<#
+  File: scripts/dev_api.ps1
+  Purpose: tooling script. Keep commands idempotent and defensive.
+  Usage: see scripts\README.md and repo root README for when/how to run.
+#># Thin wrapper to launch the FastAPI dev server via backend/python/run_api.ps1
 param(
   [string]$ApiHost,
   [int]   $ApiPort,
@@ -18,3 +22,4 @@ if ($PSBoundParameters.ContainsKey("AppSpec")) { $env:PF_API_APP  = $AppSpec }
 
 # delegate
 pwsh -ExecutionPolicy Bypass -File $pyRun
+

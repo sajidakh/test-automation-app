@@ -1,4 +1,8 @@
-
+"""
+backend/python/main.py — module overview.
+Purpose: explain what this module does, key responsibilities, and where it’s called from.
+Usage: imported by routers/services; keep functions small and pure when possible.
+"""
 from __future__ import annotations
 
 import json
@@ -137,6 +141,7 @@ def create_app() -> FastAPI:
 
 # Single exported app (tests import/reload this module)
 app = create_app()
+
 
 
 

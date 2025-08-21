@@ -1,4 +1,8 @@
-import { app, BrowserWindow, session } from "electron";
+/*
+  File: backend/node/src/main.ts
+  Purpose: UI dev harness / components. Keep side-effects obvious and small.
+  Notes: prefer functional components, typed props, and clear error handling.
+*/import { app, BrowserWindow, session } from "electron";
 import path from "node:path";
 import fs from "node:fs";
 
@@ -86,3 +90,4 @@ app.whenReady().then(() => {
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
+
