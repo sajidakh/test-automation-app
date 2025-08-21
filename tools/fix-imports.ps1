@@ -2,7 +2,9 @@
   File: tools/fix-imports.ps1
   Purpose: tooling script. Keep commands idempotent and defensive.
   Usage: see scripts\README.md and repo root README for when/how to run.
-#>param()
+#>
+
+param()
 
 $repo = "C:\Project Forge\TestAutomationApp"
 $py   = Join-Path $repo "backend\python"
