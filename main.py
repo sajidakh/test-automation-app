@@ -1,8 +1,8 @@
 """
 main.py — module overview.
-Purpose: explain what this module does, key responsibilities, and where it’s called from.
 Usage: imported by routers/services; keep functions small and pure when possible.
-"""import os
+"""
+import os
 import importlib
 
 # Always reload the real module to pick up env changes
