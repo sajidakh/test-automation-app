@@ -25,6 +25,7 @@ function Import-PFEnv([string]$root) {
     if ($_ -match '^\s*([^=]+)\s*=\s*(.*)\s*$') {
       $k = $matches[1].Trim()
       $v = $matches[2]
+      
       # strip surrounding quotes if present
       if ($v.StartsWith('"') -and $v.EndsWith('"')) { $v = $v.Substring(1, $v.Length-2) }
       if ($v.StartsWith("'") -and $v.EndsWith("'")) { $v = $v.Substring(1, $v.Length-2) }
