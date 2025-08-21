@@ -2,7 +2,9 @@
   File: scripts/dev/open-important-files.ps1
   Purpose: tooling script. Keep commands idempotent and defensive.
   Usage: see scripts\README.md and repo root README for when/how to run.
-#>$ErrorActionPreference = 'Stop'
+#>
+
+$ErrorActionPreference = 'Stop'
 Import-Module "$PSScriptRoot\..\common.psm1" -Force
 $ROOT = Get-ProjectRoot $PSScriptRoot
 $paths = @(
