@@ -2,7 +2,9 @@
   File: backend/node/src.bak.2plus/main.ts
   Purpose: UI dev harness / components. Keep side-effects obvious and small.
   Notes: prefer functional components, typed props, and clear error handling.
-*/import { app, BrowserWindow } from "electron";
+*/
+
+import { app, BrowserWindow } from "electron";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
