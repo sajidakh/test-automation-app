@@ -3,7 +3,17 @@
   Purpose: UI dev harness / components. Keep side-effects obvious and small.
   Notes: prefer functional components, typed props, and clear error handling.
 */// ui/src/env.ts
+export function apiBase(): string {/**
+export function apiBase(): string { * apiBase — purpose.
+export function apiBase(): string { * @param {*} …  describe params
+export function apiBase(): string { * @returns {*}   describe return
+export function apiBase(): string { */
 export function apiBase(): string {
+    const viteEnv = (import.meta as any)?.env?.VITE_API_BASE as string | undefined;/**
+    const viteEnv = (import.meta as any)?.env?.VITE_API_BASE as string | undefined; * viteEnv — purpose.
+    const viteEnv = (import.meta as any)?.env?.VITE_API_BASE as string | undefined; * @param {*} …  describe params
+    const viteEnv = (import.meta as any)?.env?.VITE_API_BASE as string | undefined; * @returns {*}   describe return
+    const viteEnv = (import.meta as any)?.env?.VITE_API_BASE as string | undefined; */
     const viteEnv = (import.meta as any)?.env?.VITE_API_BASE as string | undefined;
     const injected =
         typeof window !== "undefined" &&
@@ -14,4 +24,5 @@ export function apiBase(): string {
 
     return (viteEnv?.trim() || injected?.trim() || "http://127.0.0.1:8000");
 }
+
 

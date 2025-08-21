@@ -32,3 +32,4 @@ if ($LASTEXITCODE -ne 0) { $ok = $false }
 if ($ok) { Write-Host "`n✅ QUALITY GATE PASSED" -ForegroundColor Green; exit 0 }
 else     { Write-Host "`n❌ QUALITY GATE FAILED" -ForegroundColor Red;   exit 1 }
 
+

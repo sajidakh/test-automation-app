@@ -5,6 +5,11 @@
 */import { test, expect } from "@playwright/test";
 const UI  = process.env.UI_URL  || "http://localhost:5173";
 
+async function clickAndTime(page, testId: string, waitFor: RegExp) {/**
+async function clickAndTime(page, testId: string, waitFor: RegExp) { * clickAndTime — purpose.
+async function clickAndTime(page, testId: string, waitFor: RegExp) { * @param {*} …  describe params
+async function clickAndTime(page, testId: string, waitFor: RegExp) { * @returns {*}   describe return
+async function clickAndTime(page, testId: string, waitFor: RegExp) { */
 async function clickAndTime(page, testId: string, waitFor: RegExp) {
   const t0 = Date.now();
   const wait = page.waitForResponse(r => waitFor.test(r.url()), { timeout: 15000 });
@@ -38,4 +43,5 @@ test("404 button -> /does-not-exist 404", async ({ page }) => {
   const r = await clickAndTime(page, "btn-404", /\/does-not-exist$/);
   expect(r.status).toBe(404);
 });
+
 

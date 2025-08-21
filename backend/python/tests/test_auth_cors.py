@@ -9,6 +9,12 @@ from fastapi.testclient import TestClient
 
 
 def reload_app():
+def reload_app():""""
+def reload_app():reload_app — purpose.
+def reload_app():Args: describe parameters.
+def reload_app():Returns: describe value(s).
+def reload_app():Side-effects: none / notes.
+def reload_app():""""
     if "main" in sys.modules:
         importlib.reload(sys.modules["main"])
     else:
@@ -17,6 +23,12 @@ def reload_app():
     return app
 
 def test_secure_ping_401_when_no_key(monkeypatch):
+def test_secure_ping_401_when_no_key(monkeypatch):""""
+def test_secure_ping_401_when_no_key(monkeypatch):test_secure_ping_401_when_no_key — purpose.
+def test_secure_ping_401_when_no_key(monkeypatch):Args: describe parameters.
+def test_secure_ping_401_when_no_key(monkeypatch):Returns: describe value(s).
+def test_secure_ping_401_when_no_key(monkeypatch):Side-effects: none / notes.
+def test_secure_ping_401_when_no_key(monkeypatch):""""
     monkeypatch.setenv("PF_API_KEY", "k")   # require a key
     app = reload_app()
     client = TestClient(app)
@@ -24,6 +36,12 @@ def test_secure_ping_401_when_no_key(monkeypatch):
     assert r.status_code == 401
 
 def test_secure_ping_200_with_key(monkeypatch):
+def test_secure_ping_200_with_key(monkeypatch):""""
+def test_secure_ping_200_with_key(monkeypatch):test_secure_ping_200_with_key — purpose.
+def test_secure_ping_200_with_key(monkeypatch):Args: describe parameters.
+def test_secure_ping_200_with_key(monkeypatch):Returns: describe value(s).
+def test_secure_ping_200_with_key(monkeypatch):Side-effects: none / notes.
+def test_secure_ping_200_with_key(monkeypatch):""""
     monkeypatch.setenv("PF_API_KEY", "k")
     app = reload_app()
     client = TestClient(app)
@@ -32,6 +50,12 @@ def test_secure_ping_200_with_key(monkeypatch):
     assert r.json()["pong"] is True
 
 def test_cors_allows_configured_origin(monkeypatch):
+def test_cors_allows_configured_origin(monkeypatch):""""
+def test_cors_allows_configured_origin(monkeypatch):test_cors_allows_configured_origin — purpose.
+def test_cors_allows_configured_origin(monkeypatch):Args: describe parameters.
+def test_cors_allows_configured_origin(monkeypatch):Returns: describe value(s).
+def test_cors_allows_configured_origin(monkeypatch):Side-effects: none / notes.
+def test_cors_allows_configured_origin(monkeypatch):""""
     monkeypatch.setenv("PF_CORS_ORIGINS", "http://example.com")
     app = reload_app()
     client = TestClient(app)
@@ -42,5 +66,6 @@ def test_cors_allows_configured_origin(monkeypatch):
     })
     assert r.status_code in (200, 204)
     assert r.headers.get("access-control-allow-origin") == "http://example.com"
+
 
 

@@ -39,6 +39,12 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
         return response
 
 def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):""""
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):_envelope — purpose.
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):Args: describe parameters.
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):Returns: describe value(s).
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):Side-effects: none / notes.
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):""""
     rid = request.headers.get("x-request-id")
     body = {
         "ok": False,
@@ -55,6 +61,12 @@ def _envelope(request: Request, *, code: str, status: int, message: str, err_typ
     return JSONResponse(body, status_code=status)
 
 def install_error_handlers(app):
+def install_error_handlers(app):""""
+def install_error_handlers(app):install_error_handlers — purpose.
+def install_error_handlers(app):Args: describe parameters.
+def install_error_handlers(app):Returns: describe value(s).
+def install_error_handlers(app):Side-effects: none / notes.
+def install_error_handlers(app):""""
     @app.exception_handler(RequestValidationError)
     async def _validation(request: Request, exc: RequestValidationError):
         return _envelope(
@@ -93,4 +105,5 @@ def install_error_handlers(app):
             message=str(exc),
             err_type=exc.__class__.__name__,
         )
+
 

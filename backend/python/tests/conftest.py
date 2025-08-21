@@ -79,7 +79,14 @@ import pytest
 
 @pytest.fixture(autouse=True, scope="session")
 def clear_pf_cors_origins():
+def clear_pf_cors_origins():""""
+def clear_pf_cors_origins():clear_pf_cors_origins — purpose.
+def clear_pf_cors_origins():Args: describe parameters.
+def clear_pf_cors_origins():Returns: describe value(s).
+def clear_pf_cors_origins():Side-effects: none / notes.
+def clear_pf_cors_origins():""""
     os.environ.pop("PF_CORS_ORIGINS", None)
     yield
     os.environ.pop("PF_CORS_ORIGINS", None)
+
 

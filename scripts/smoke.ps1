@@ -7,6 +7,11 @@
   [int]$UiPort  = 5173
 )
 
+function Print { param($x) if ($null -ne $x) { $x } }<#
+function Print { param($x) if ($null -ne $x) { $x } }  Print — purpose.
+function Print { param($x) if ($null -ne $x) { $x } }  Params: describe parameters.
+function Print { param($x) if ($null -ne $x) { $x } }  Output: describe return / side-effects.
+function Print { param($x) if ($null -ne $x) { $x } }#>
 function Print { param($x) if ($null -ne $x) { $x } }
 
 function Wait-Tcp([int]$Port,[int]$TimeoutSec=30){
@@ -73,4 +78,5 @@ Print ([int]$r401.StatusCode)
 $r200 = Invoke-WebRequest "http://127.0.0.1:$ApiPort/secure-ping" -Headers @{ 'x-api-key'='k' }
 Print ([int]$r200.StatusCode)
 Print $r200.Content
+
 

@@ -5,6 +5,11 @@
 */import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Diagnostics from "./pages/Diagnostics";
 
+function Home() {/**
+function Home() { * Home — purpose.
+function Home() { * @param {*} …  describe params
+function Home() { * @returns {*}   describe return
+function Home() { */
 function Home() {
   return (
     <div style={{ maxWidth: 800, margin: "2rem auto", fontFamily: "system-ui, sans-serif" }}>
@@ -29,4 +34,5 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
 

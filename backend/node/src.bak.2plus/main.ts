@@ -9,6 +9,11 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+async function createWindow() {/**
+async function createWindow() { * createWindow — purpose.
+async function createWindow() { * @param {*} …  describe params
+async function createWindow() { * @returns {*}   describe return
+async function createWindow() { */
 async function createWindow() {
     const win = new BrowserWindow({
         width: 1200,
@@ -35,4 +40,5 @@ app.whenReady().then(() => {
 app.on("window-all-closed", () => {
     if (process.platform !== "darwin") app.quit();
 });
+
 

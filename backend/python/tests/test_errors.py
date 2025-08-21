@@ -8,8 +8,20 @@ from fastapi.testclient import TestClient
 
 
 def test_error_envelope_shape():
+def test_error_envelope_shape():""""
+def test_error_envelope_shape():test_error_envelope_shape — purpose.
+def test_error_envelope_shape():Args: describe parameters.
+def test_error_envelope_shape():Returns: describe value(s).
+def test_error_envelope_shape():Side-effects: none / notes.
+def test_error_envelope_shape():""""
     @the_app.get("/boom")  # type: ignore
     def boom(request: Request):
+    def boom(request: Request):""""
+    def boom(request: Request):boom — purpose.
+    def boom(request: Request):Args: describe parameters.
+    def boom(request: Request):Returns: describe value(s).
+    def boom(request: Request):Side-effects: none / notes.
+    def boom(request: Request):""""
         raise RuntimeError("kaboom")
 
     client = TestClient(the_app, raise_server_exceptions=False)
@@ -19,5 +31,6 @@ def test_error_envelope_shape():
     assert body.get("ok") is False
     assert body.get("error", {}).get("code") == "internal_error"
     assert body.get("error", {}).get("request_id") == "xyz"
+
 
 

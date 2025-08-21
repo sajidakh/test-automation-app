@@ -9,6 +9,12 @@ from fastapi.testclient import TestClient
 
 
 def reload_app():
+def reload_app():""""
+def reload_app():reload_app — purpose.
+def reload_app():Args: describe parameters.
+def reload_app():Returns: describe value(s).
+def reload_app():Side-effects: none / notes.
+def reload_app():""""
     if "main" in sys.modules:
         importlib.reload(sys.modules["main"])
     else:
@@ -17,6 +23,12 @@ def reload_app():
     return app
 
 def test_unlisted_origin_is_rejected(monkeypatch):
+def test_unlisted_origin_is_rejected(monkeypatch):""""
+def test_unlisted_origin_is_rejected(monkeypatch):test_unlisted_origin_is_rejected — purpose.
+def test_unlisted_origin_is_rejected(monkeypatch):Args: describe parameters.
+def test_unlisted_origin_is_rejected(monkeypatch):Returns: describe value(s).
+def test_unlisted_origin_is_rejected(monkeypatch):Side-effects: none / notes.
+def test_unlisted_origin_is_rejected(monkeypatch):""""
     monkeypatch.setenv("PF_CORS_ORIGINS", "http://example.com")
     app = reload_app()
     client = TestClient(app)
@@ -28,5 +40,6 @@ def test_unlisted_origin_is_rejected(monkeypatch):
     })
     assert r.status_code in (200, 204, 400)  # behavior varies by stack/version
     assert r.headers.get("access-control-allow-origin") is None
+
 
 

@@ -19,3 +19,4 @@ foreach ($rel in $paths) {
   if (Test-Path $p) { Start-Process notepad.exe $p } else { Write-Warning "Missing: $rel" }
 }
 
+

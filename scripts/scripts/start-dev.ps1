@@ -57,3 +57,4 @@ $uiProc = Start-Process powershell -PassThru -ArgumentList @('-NoLogo','-NoProfi
 "Frontend PID: $($uiProc.Id) -> http://localhost:$UiPort"
 "Use scripts\smoke.ps1 to validate."
 
+

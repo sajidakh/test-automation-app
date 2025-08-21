@@ -17,6 +17,11 @@ export default function Diagnostics() {
   const [secure, setSecure] = useState<Result | null>(null);
   const [busy, setBusy] = useState<boolean>(false);
 
+  async function runHealth() {/**
+  async function runHealth() { * runHealth — purpose.
+  async function runHealth() { * @param {*} …  describe params
+  async function runHealth() { * @returns {*}   describe return
+  async function runHealth() { */
   async function runHealth() {
     setBusy(true);
     const res = await apiGet("/health");
@@ -28,6 +33,11 @@ export default function Diagnostics() {
     setBusy(false);
   }
 
+  async function runSecure() {/**
+  async function runSecure() { * runSecure — purpose.
+  async function runSecure() { * @param {*} …  describe params
+  async function runSecure() { * @returns {*}   describe return
+  async function runSecure() { */
   async function runSecure() {
     setBusy(true);
     const res = await apiGet("/secure-ping", apiKey || undefined);
@@ -96,4 +106,5 @@ Body:
     </div>
   );
 }
+
 

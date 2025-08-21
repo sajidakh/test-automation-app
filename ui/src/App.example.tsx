@@ -7,6 +7,11 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const API_KEY = import.meta.env.VITE_API_KEY || ""; // optional
 
+async function call(path: string, opts: RequestInit = {}) {/**
+async function call(path: string, opts: RequestInit = {}) { * call — purpose.
+async function call(path: string, opts: RequestInit = {}) { * @param {*} …  describe params
+async function call(path: string, opts: RequestInit = {}) { * @returns {*}   describe return
+async function call(path: string, opts: RequestInit = {}) { */
 async function call(path: string, opts: RequestInit = {}) {
   const headers: Record<string,string> = { "content-type": "application/json" };
   if (API_KEY && path.includes("secure-ping")) headers["x-api-key"] = API_KEY;
@@ -17,6 +22,11 @@ async function call(path: string, opts: RequestInit = {}) {
 export default function App() {
   const [log, setLog] = React.useState<string[]>([]);
 
+  async function ping(path: string, label: string) {/**
+  async function ping(path: string, label: string) { * ping — purpose.
+  async function ping(path: string, label: string) { * @param {*} …  describe params
+  async function ping(path: string, label: string) { * @returns {*}   describe return
+  async function ping(path: string, label: string) { */
   async function ping(path: string, label: string) {
     const t0 = performance.now();
     try {
@@ -45,4 +55,5 @@ export default function App() {
     </div>
   );
 }
+
 

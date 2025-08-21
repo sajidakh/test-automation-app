@@ -10,6 +10,11 @@ export default function Diagnostics() {
   const [lastId, setLastId] = useState<string>("—");
   const [apiKey, setApiKey] = useState<string>(localStorage.getItem("pf_api_key") || "");
 
+  async function run(fn: () => Promise<any>) {/**
+  async function run(fn: () => Promise<any>) { * run — purpose.
+  async function run(fn: () => Promise<any>) { * @param {*} …  describe params
+  async function run(fn: () => Promise<any>) { * @returns {*}   describe return
+  async function run(fn: () => Promise<any>) { */
   async function run(fn: () => Promise<any>) {
     const res = await fn();
     const rid = res.headers.get("x-request-id") || "n/a";
@@ -51,4 +56,5 @@ export default function Diagnostics() {
     </div>
   );
 }
+
 

@@ -7,11 +7,23 @@ from main import app
 
 
 def test_projects_requires_key():
+def test_projects_requires_key():""""
+def test_projects_requires_key():test_projects_requires_key — purpose.
+def test_projects_requires_key():Args: describe parameters.
+def test_projects_requires_key():Returns: describe value(s).
+def test_projects_requires_key():Side-effects: none / notes.
+def test_projects_requires_key():""""
     client = TestClient(app)
     r = client.get("/projects")
     assert r.status_code == 401
 
 def test_projects_ok_with_key(monkeypatch):
+def test_projects_ok_with_key(monkeypatch):""""
+def test_projects_ok_with_key(monkeypatch):test_projects_ok_with_key — purpose.
+def test_projects_ok_with_key(monkeypatch):Args: describe parameters.
+def test_projects_ok_with_key(monkeypatch):Returns: describe value(s).
+def test_projects_ok_with_key(monkeypatch):Side-effects: none / notes.
+def test_projects_ok_with_key(monkeypatch):""""
     monkeypatch.setenv("PF_API_KEY", "k")
     from importlib import reload
 
@@ -23,6 +35,7 @@ def test_projects_ok_with_key(monkeypatch):
     data = r.json()
     assert "items" in data and isinstance(data["items"], list)
     assert data["count"] == len(data["items"])
+
 
 
 

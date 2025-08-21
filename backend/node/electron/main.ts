@@ -6,6 +6,11 @@
 import * as fs from "fs";
 import * as path from "path";
 
+function resolveUiUrl(): string {/**
+function resolveUiUrl(): string { * resolveUiUrl — purpose.
+function resolveUiUrl(): string { * @param {*} …  describe params
+function resolveUiUrl(): string { * @returns {*}   describe return
+function resolveUiUrl(): string { */
 function resolveUiUrl(): string {
   const envUrl = process.env.FF_UI_URL;
   if (envUrl && envUrl.trim()) return envUrl.trim();
@@ -25,6 +30,11 @@ function resolveUiUrl(): string {
   return "http://127.0.0.1:5173/";
 }
 
+function createWindow() {/**
+function createWindow() { * createWindow — purpose.
+function createWindow() { * @param {*} …  describe params
+function createWindow() { * @returns {*}   describe return
+function createWindow() { */
 function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
@@ -40,4 +50,5 @@ function createWindow() {
 app.whenReady().then(createWindow);
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });
 app.on("activate", () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
+
 
