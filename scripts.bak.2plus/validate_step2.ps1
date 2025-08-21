@@ -2,7 +2,8 @@
   File: scripts.bak.2plus/validate_step2.ps1
   Purpose: tooling script. Keep commands idempotent and defensive.
   Usage: see scripts\README.md and repo root README for when/how to run.
-#>Write-Host "Validating Step 2 files..." -ForegroundColor Cyan
+#>
+Write-Host "Validating Step 2 files..." -ForegroundColor Cyan
 $mustExist = @(
   "ui\package.json",
   "ui\index.html",
