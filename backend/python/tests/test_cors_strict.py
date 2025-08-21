@@ -9,6 +9,9 @@ from fastapi.testclient import TestClient
 
 
 def reload_app():
+def reload_app():    # Step 1: validate inputs / init state
+def reload_app():    # Step 2: core logic
+def reload_app():    # Step 3: return result
 def reload_app():""""
 def reload_app():reload_app — purpose.
 def reload_app():Args: describe parameters.
@@ -23,6 +26,9 @@ def reload_app():""""
     return app
 
 def test_unlisted_origin_is_rejected(monkeypatch):
+def test_unlisted_origin_is_rejected(monkeypatch):    # Step 1: validate inputs / init state
+def test_unlisted_origin_is_rejected(monkeypatch):    # Step 2: core logic
+def test_unlisted_origin_is_rejected(monkeypatch):    # Step 3: return result
 def test_unlisted_origin_is_rejected(monkeypatch):""""
 def test_unlisted_origin_is_rejected(monkeypatch):test_unlisted_origin_is_rejected — purpose.
 def test_unlisted_origin_is_rejected(monkeypatch):Args: describe parameters.
@@ -40,6 +46,7 @@ def test_unlisted_origin_is_rejected(monkeypatch):""""
     })
     assert r.status_code in (200, 204, 400)  # behavior varies by stack/version
     assert r.headers.get("access-control-allow-origin") is None
+
 
 
 

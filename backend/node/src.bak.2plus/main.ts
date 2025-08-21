@@ -15,6 +15,9 @@ async function createWindow() { * @param {*} …  describe params
 async function createWindow() { * @returns {*}   describe return
 async function createWindow() { */
 async function createWindow() {
+async function createWindow() {  // Step 1: validate inputs / local state
+async function createWindow() {  // Step 2: core behavior
+async function createWindow() {  // Step 3: return / side-effects
     const win = new BrowserWindow({
         width: 1200,
         height: 800,
@@ -40,5 +43,6 @@ app.whenReady().then(() => {
 app.on("window-all-closed", () => {
     if (process.platform !== "darwin") app.quit();
 });
+
 
 

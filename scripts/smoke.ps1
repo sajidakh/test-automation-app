@@ -8,12 +8,33 @@
 )
 
 function Print { param($x) if ($null -ne $x) { $x } }<#
+function Print { param($x) if ($null -ne $x) { $x } }<#    # Step 1: validate inputs / gather context
+function Print { param($x) if ($null -ne $x) { $x } }<#    # Step 2: main operation
+function Print { param($x) if ($null -ne $x) { $x } }<#    # Step 3: output / return / cleanup
 function Print { param($x) if ($null -ne $x) { $x } }  Print — purpose.
+function Print { param($x) if ($null -ne $x) { $x } }  Print — purpose.    # Step 1: validate inputs / gather context
+function Print { param($x) if ($null -ne $x) { $x } }  Print — purpose.    # Step 2: main operation
+function Print { param($x) if ($null -ne $x) { $x } }  Print — purpose.    # Step 3: output / return / cleanup
 function Print { param($x) if ($null -ne $x) { $x } }  Params: describe parameters.
+function Print { param($x) if ($null -ne $x) { $x } }  Params: describe parameters.    # Step 1: validate inputs / gather context
+function Print { param($x) if ($null -ne $x) { $x } }  Params: describe parameters.    # Step 2: main operation
+function Print { param($x) if ($null -ne $x) { $x } }  Params: describe parameters.    # Step 3: output / return / cleanup
 function Print { param($x) if ($null -ne $x) { $x } }  Output: describe return / side-effects.
+function Print { param($x) if ($null -ne $x) { $x } }  Output: describe return / side-effects.    # Step 1: validate inputs / gather context
+function Print { param($x) if ($null -ne $x) { $x } }  Output: describe return / side-effects.    # Step 2: main operation
+function Print { param($x) if ($null -ne $x) { $x } }  Output: describe return / side-effects.    # Step 3: output / return / cleanup
 function Print { param($x) if ($null -ne $x) { $x } }#>
+function Print { param($x) if ($null -ne $x) { $x } }#>    # Step 1: validate inputs / gather context
+function Print { param($x) if ($null -ne $x) { $x } }#>    # Step 2: main operation
+function Print { param($x) if ($null -ne $x) { $x } }#>    # Step 3: output / return / cleanup
 function Print { param($x) if ($null -ne $x) { $x } }
 
+function Print { param($x) if ($null -ne $x) { $x } }    # Step 1: validate inputs / gather context
+function Print { param($x) if ($null -ne $x) { $x } }    # Step 2: main operation
+function Print { param($x) if ($null -ne $x) { $x } }    # Step 3: output / return / cleanup
+function Print { param($x) if ($null -ne $x) { $x } }    # Step 3: output / return / cleanup    # Step 1: validate inputs / gather context
+function Print { param($x) if ($null -ne $x) { $x } }    # Step 3: output / return / cleanup    # Step 2: main operation
+function Print { param($x) if ($null -ne $x) { $x } }    # Step 3: output / return / cleanup    # Step 3: output / return / cleanup
 function Wait-Tcp([int]$Port,[int]$TimeoutSec=30){
   $t0=Get-Date; $deadline=(Get-Date).AddSeconds($TimeoutSec)
   while((Get-Date)-lt $deadline){
@@ -78,5 +99,6 @@ Print ([int]$r401.StatusCode)
 $r200 = Invoke-WebRequest "http://127.0.0.1:$ApiPort/secure-ping" -Headers @{ 'x-api-key'='k' }
 Print ([int]$r200.StatusCode)
 Print $r200.Content
+
 
 

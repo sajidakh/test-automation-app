@@ -23,6 +23,9 @@ def _elog(payload: dict) -> None:
 
 class ObservabilityMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+    async def dispatch(self, request: Request, call_next):    # Step 1: validate inputs / init state
+    async def dispatch(self, request: Request, call_next):    # Step 2: core logic
+    async def dispatch(self, request: Request, call_next):    # Step 3: return result
         rid = request.headers.get("x-request-id")
         _elog({"level":"INFO","logger":"api","message":"request_start","time":_now(),
                "request_id":rid,"path":request.url.path,"method":request.method})
@@ -39,6 +42,9 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
         return response
 
 def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):    # Step 1: validate inputs / init state
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):    # Step 2: core logic
+def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):    # Step 3: return result
 def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):""""
 def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):_envelope — purpose.
 def _envelope(request: Request, *, code: str, status: int, message: str, err_type: str | None = None, extra: dict | None = None):Args: describe parameters.
@@ -61,6 +67,9 @@ def _envelope(request: Request, *, code: str, status: int, message: str, err_typ
     return JSONResponse(body, status_code=status)
 
 def install_error_handlers(app):
+def install_error_handlers(app):    # Step 1: validate inputs / init state
+def install_error_handlers(app):    # Step 2: core logic
+def install_error_handlers(app):    # Step 3: return result
 def install_error_handlers(app):""""
 def install_error_handlers(app):install_error_handlers — purpose.
 def install_error_handlers(app):Args: describe parameters.
@@ -69,6 +78,9 @@ def install_error_handlers(app):Side-effects: none / notes.
 def install_error_handlers(app):""""
     @app.exception_handler(RequestValidationError)
     async def _validation(request: Request, exc: RequestValidationError):
+    async def _validation(request: Request, exc: RequestValidationError):    # Step 1: validate inputs / init state
+    async def _validation(request: Request, exc: RequestValidationError):    # Step 2: core logic
+    async def _validation(request: Request, exc: RequestValidationError):    # Step 3: return result
         return _envelope(
             request,
             code="validation_error",
@@ -80,6 +92,9 @@ def install_error_handlers(app):""""
 
     @app.exception_handler(HTTPException)
     async def _http_exc(request: Request, exc: HTTPException):
+    async def _http_exc(request: Request, exc: HTTPException):    # Step 1: validate inputs / init state
+    async def _http_exc(request: Request, exc: HTTPException):    # Step 2: core logic
+    async def _http_exc(request: Request, exc: HTTPException):    # Step 3: return result
         # map common statuses to stable error codes
         codes = {
             401: "unauthorized",
@@ -98,6 +113,9 @@ def install_error_handlers(app):""""
 
     @app.exception_handler(Exception)
     async def _unhandled(request: Request, exc: Exception):
+    async def _unhandled(request: Request, exc: Exception):    # Step 1: validate inputs / init state
+    async def _unhandled(request: Request, exc: Exception):    # Step 2: core logic
+    async def _unhandled(request: Request, exc: Exception):    # Step 3: return result
         return _envelope(
             request,
             code="internal_error",
@@ -105,5 +123,6 @@ def install_error_handlers(app):""""
             message=str(exc),
             err_type=exc.__class__.__name__,
         )
+
 
 

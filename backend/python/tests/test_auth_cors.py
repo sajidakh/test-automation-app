@@ -9,6 +9,9 @@ from fastapi.testclient import TestClient
 
 
 def reload_app():
+def reload_app():    # Step 1: validate inputs / init state
+def reload_app():    # Step 2: core logic
+def reload_app():    # Step 3: return result
 def reload_app():""""
 def reload_app():reload_app — purpose.
 def reload_app():Args: describe parameters.
@@ -23,6 +26,9 @@ def reload_app():""""
     return app
 
 def test_secure_ping_401_when_no_key(monkeypatch):
+def test_secure_ping_401_when_no_key(monkeypatch):    # Step 1: validate inputs / init state
+def test_secure_ping_401_when_no_key(monkeypatch):    # Step 2: core logic
+def test_secure_ping_401_when_no_key(monkeypatch):    # Step 3: return result
 def test_secure_ping_401_when_no_key(monkeypatch):""""
 def test_secure_ping_401_when_no_key(monkeypatch):test_secure_ping_401_when_no_key — purpose.
 def test_secure_ping_401_when_no_key(monkeypatch):Args: describe parameters.
@@ -36,6 +42,9 @@ def test_secure_ping_401_when_no_key(monkeypatch):""""
     assert r.status_code == 401
 
 def test_secure_ping_200_with_key(monkeypatch):
+def test_secure_ping_200_with_key(monkeypatch):    # Step 1: validate inputs / init state
+def test_secure_ping_200_with_key(monkeypatch):    # Step 2: core logic
+def test_secure_ping_200_with_key(monkeypatch):    # Step 3: return result
 def test_secure_ping_200_with_key(monkeypatch):""""
 def test_secure_ping_200_with_key(monkeypatch):test_secure_ping_200_with_key — purpose.
 def test_secure_ping_200_with_key(monkeypatch):Args: describe parameters.
@@ -50,6 +59,9 @@ def test_secure_ping_200_with_key(monkeypatch):""""
     assert r.json()["pong"] is True
 
 def test_cors_allows_configured_origin(monkeypatch):
+def test_cors_allows_configured_origin(monkeypatch):    # Step 1: validate inputs / init state
+def test_cors_allows_configured_origin(monkeypatch):    # Step 2: core logic
+def test_cors_allows_configured_origin(monkeypatch):    # Step 3: return result
 def test_cors_allows_configured_origin(monkeypatch):""""
 def test_cors_allows_configured_origin(monkeypatch):test_cors_allows_configured_origin — purpose.
 def test_cors_allows_configured_origin(monkeypatch):Args: describe parameters.
@@ -66,6 +78,7 @@ def test_cors_allows_configured_origin(monkeypatch):""""
     })
     assert r.status_code in (200, 204)
     assert r.headers.get("access-control-allow-origin") == "http://example.com"
+
 
 
 

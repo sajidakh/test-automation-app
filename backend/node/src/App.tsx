@@ -11,6 +11,9 @@ function Home() { * @param {*} …  describe params
 function Home() { * @returns {*}   describe return
 function Home() { */
 function Home() {
+function Home() {  // Step 1: validate inputs / local state
+function Home() {  // Step 2: core behavior
+function Home() {  // Step 3: return / side-effects
   return (
     <div style={{ maxWidth: 800, margin: "2rem auto", fontFamily: "system-ui, sans-serif" }}>
       <h1>FlowForge UI</h1>
@@ -34,5 +37,6 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
 
 

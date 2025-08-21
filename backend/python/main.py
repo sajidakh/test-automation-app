@@ -79,6 +79,9 @@ def create_app() -> FastAPI:
     # ---------- Request ID + JSON logs ----------
     @app.middleware("http")
     async def _request_meta(request: Request, call_next):
+    async def _request_meta(request: Request, call_next):    # Step 1: validate inputs / init state
+    async def _request_meta(request: Request, call_next):    # Step 2: core logic
+    async def _request_meta(request: Request, call_next):    # Step 3: return result
         rid = request.headers.get("x-request-id") or str(uuid.uuid4())
         request.state.request_id = rid
         _json_log("INFO", "request_start", request_id=rid, path=request.url.path, method=request.method)
@@ -90,6 +93,9 @@ def create_app() -> FastAPI:
     # ---------- Error envelope ----------
     @app.exception_handler(Exception)
     async def _unhandled(request: Request, exc: Exception):
+    async def _unhandled(request: Request, exc: Exception):    # Step 1: validate inputs / init state
+    async def _unhandled(request: Request, exc: Exception):    # Step 2: core logic
+    async def _unhandled(request: Request, exc: Exception):    # Step 3: return result
         rid = getattr(getattr(request, "state", None), "request_id", None)
         # Keep request_id BOTH top-level and inside error to satisfy stricter consumers/tests
         return JSONResponse(
@@ -124,15 +130,24 @@ def create_app() -> FastAPI:
     @limiter.limit(lambda: os.getenv("PF_RATE_PER_MINUTE") or "60")
     @app.get("/health")
     async def health(request: Request):
+    async def health(request: Request):    # Step 1: validate inputs / init state
+    async def health(request: Request):    # Step 2: core logic
+    async def health(request: Request):    # Step 3: return result
         # Tests expect plain "ok"
         return PlainTextResponse("ok")
 
     @app.get("/secure-ping", dependencies=[Depends(require_api_key)])
     async def secure_ping(request: Request):
+    async def secure_ping(request: Request):    # Step 1: validate inputs / init state
+    async def secure_ping(request: Request):    # Step 2: core logic
+    async def secure_ping(request: Request):    # Step 3: return result
         return {"pong": True}
 
     @app.get("/projects", dependencies=[Depends(require_api_key)])
     async def projects(request: Request):
+    async def projects(request: Request):    # Step 1: validate inputs / init state
+    async def projects(request: Request):    # Step 2: core logic
+    async def projects(request: Request):    # Step 3: return result
         items: list[dict] = []
         return {"items": items, "count": len(items)}
 
@@ -141,6 +156,7 @@ def create_app() -> FastAPI:
 
 # Single exported app (tests import/reload this module)
 app = create_app()
+
 
 
 

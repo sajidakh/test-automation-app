@@ -13,6 +13,9 @@ async function call(path: string, opts: RequestInit = {}) { * @param {*} …  de
 async function call(path: string, opts: RequestInit = {}) { * @returns {*}   describe return
 async function call(path: string, opts: RequestInit = {}) { */
 async function call(path: string, opts: RequestInit = {}) {
+async function call(path: string, opts: RequestInit = {}) {  // Step 1: validate inputs / local state
+async function call(path: string, opts: RequestInit = {}) {  // Step 2: core behavior
+async function call(path: string, opts: RequestInit = {}) {  // Step 3: return / side-effects
   const headers: Record<string,string> = { "content-type": "application/json" };
   if (API_KEY && path.includes("secure-ping")) headers["x-api-key"] = API_KEY;
   const res = await fetch(API_URL + path, { ...opts, headers });
@@ -28,6 +31,9 @@ export default function App() {
   async function ping(path: string, label: string) { * @returns {*}   describe return
   async function ping(path: string, label: string) { */
   async function ping(path: string, label: string) {
+  async function ping(path: string, label: string) {  // Step 1: validate inputs / local state
+  async function ping(path: string, label: string) {  // Step 2: core behavior
+  async function ping(path: string, label: string) {  // Step 3: return / side-effects
     const t0 = performance.now();
     try {
       const res = await call(path);
@@ -56,5 +62,6 @@ export default function App() {
     </div>
   );
 }
+
 
 

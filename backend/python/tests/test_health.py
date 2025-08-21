@@ -8,6 +8,9 @@ from fastapi.testclient import TestClient
 client = TestClient(app)
 
 def test_health():
+def test_health():    # Step 1: validate inputs / init state
+def test_health():    # Step 2: core logic
+def test_health():    # Step 3: return result
 def test_health():""""
 def test_health():test_health — purpose.
 def test_health():Args: describe parameters.
@@ -17,6 +20,7 @@ def test_health():""""
     r = client.get("/health")
     assert r.status_code == 200
     assert r.text.strip('"') == "ok" or r.text == "ok"
+
 
 
 

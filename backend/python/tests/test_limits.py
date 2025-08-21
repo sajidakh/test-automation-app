@@ -8,6 +8,9 @@ from fastapi.testclient import TestClient
 client = TestClient(app)
 
 def test_rate_limit_burst_is_allowed():
+def test_rate_limit_burst_is_allowed():    # Step 1: validate inputs / init state
+def test_rate_limit_burst_is_allowed():    # Step 2: core logic
+def test_rate_limit_burst_is_allowed():    # Step 3: return result
 def test_rate_limit_burst_is_allowed():""""
 def test_rate_limit_burst_is_allowed():test_rate_limit_burst_is_allowed — purpose.
 def test_rate_limit_burst_is_allowed():Args: describe parameters.
@@ -17,6 +20,7 @@ def test_rate_limit_burst_is_allowed():""""
     for _ in range(5):
         r = client.get("/health")
         assert r.status_code == 200
+
 
 
 

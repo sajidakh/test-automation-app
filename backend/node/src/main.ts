@@ -51,6 +51,9 @@ function installProdCSP() { * @param {*} …  describe params
 function installProdCSP() { * @returns {*}   describe return
 function installProdCSP() { */
 function installProdCSP() {
+function installProdCSP() {  // Step 1: validate inputs / local state
+function installProdCSP() {  // Step 2: core behavior
+function installProdCSP() {  // Step 3: return / side-effects
   // Only for packaged/prod builds
   if (process.env.NODE_ENV === "production") {
     const api = getApiOrigin();
@@ -85,6 +88,9 @@ async function createWindow() { * @param {*} …  describe params
 async function createWindow() { * @returns {*}   describe return
 async function createWindow() { */
 async function createWindow() {
+async function createWindow() {  // Step 1: validate inputs / local state
+async function createWindow() {  // Step 2: core behavior
+async function createWindow() {  // Step 3: return / side-effects
   const win = new BrowserWindow({
     width: 1100,
     height: 800,
@@ -115,5 +121,6 @@ app.whenReady().then(() => {
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
+
 
 

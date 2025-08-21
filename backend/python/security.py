@@ -12,6 +12,9 @@ from backend.python.settings import get_settings
 
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+    async def dispatch(self, request: Request, call_next):    # Step 1: validate inputs / init state
+    async def dispatch(self, request: Request, call_next):    # Step 2: core logic
+    async def dispatch(self, request: Request, call_next):    # Step 3: return result
         response = await call_next(request)
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
         response.headers.setdefault("X-Frame-Options", "DENY")
@@ -23,8 +26,12 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         return response
 
 async def require_api_key(x_api_key: str | None = Header(default=None)):
+async def require_api_key(x_api_key: str | None = Header(default=None)):    # Step 1: validate inputs / init state
+async def require_api_key(x_api_key: str | None = Header(default=None)):    # Step 2: core logic
+async def require_api_key(x_api_key: str | None = Header(default=None)):    # Step 3: return result
     s = get_settings()
     if s.api_key and x_api_key != s.api_key:
         raise HTTPException(status_code=401, detail="invalid api key")
+
 
 

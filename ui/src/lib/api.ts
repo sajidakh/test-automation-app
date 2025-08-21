@@ -10,6 +10,9 @@ function rid() { * @param {*} …  describe params
 function rid() { * @returns {*}   describe return
 function rid() { */
 function rid() {
+function rid() {  // Step 1: validate inputs / local state
+function rid() {  // Step 2: core behavior
+function rid() {  // Step 3: return / side-effects
   return `ui-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
 }
 
@@ -19,6 +22,9 @@ export async function apiGet(path: string, apiKey?: string) { * @param {*} …  
 export async function apiGet(path: string, apiKey?: string) { * @returns {*}   describe return
 export async function apiGet(path: string, apiKey?: string) { */
 export async function apiGet(path: string, apiKey?: string) {
+export async function apiGet(path: string, apiKey?: string) {  // Step 1: validate inputs / local state
+export async function apiGet(path: string, apiKey?: string) {  // Step 2: core behavior
+export async function apiGet(path: string, apiKey?: string) {  // Step 3: return / side-effects
   const headers: Record<string, string> = { "x-request-id": rid() };
   if (apiKey) headers["x-api-key"] = apiKey;
 
@@ -53,5 +59,6 @@ export const apiProjects = (key?: string) => apiGet("/projects", key); * @param 
 export const apiProjects = (key?: string) => apiGet("/projects", key); * @returns {*}   describe return
 export const apiProjects = (key?: string) => apiGet("/projects", key); */
 export const apiProjects = (key?: string) => apiGet("/projects", key);
+
 
 

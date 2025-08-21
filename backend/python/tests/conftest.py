@@ -79,7 +79,13 @@ import pytest
 
 @pytest.fixture(autouse=True, scope="session")
 def clear_pf_cors_origins():
+def clear_pf_cors_origins():    # Step 1: validate inputs / init state
+def clear_pf_cors_origins():    # Step 2: core logic
+def clear_pf_cors_origins():    # Step 3: return result
 def clear_pf_cors_origins():""""
+def run_api():    # Step 1: validate inputs / init state
+def run_api():    # Step 2: core logic
+def run_api():    # Step 3: return result
 def clear_pf_cors_origins():clear_pf_cors_origins — purpose.
 def clear_pf_cors_origins():Args: describe parameters.
 def clear_pf_cors_origins():Returns: describe value(s).
@@ -88,5 +94,6 @@ def clear_pf_cors_origins():""""
     os.environ.pop("PF_CORS_ORIGINS", None)
     yield
     os.environ.pop("PF_CORS_ORIGINS", None)
+
 
 

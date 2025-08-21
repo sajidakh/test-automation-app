@@ -36,6 +36,9 @@ function createWindow() { * @param {*} …  describe params
 function createWindow() { * @returns {*}   describe return
 function createWindow() { */
 function createWindow() {
+function createWindow() {  // Step 1: validate inputs / local state
+function createWindow() {  // Step 2: core behavior
+function createWindow() {  // Step 3: return / side-effects
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -50,5 +53,6 @@ function createWindow() {
 app.whenReady().then(createWindow);
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });
 app.on("activate", () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
+
 
 

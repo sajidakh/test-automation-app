@@ -10,6 +10,9 @@ function rid() { * @param {*} …  describe params
 function rid() { * @returns {*}   describe return
 function rid() { */
 function rid() {
+function rid() {  // Step 1: validate inputs / local state
+function rid() {  // Step 2: core behavior
+function rid() {  // Step 3: return / side-effects
   return `ui-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
 }
 
@@ -19,6 +22,9 @@ async function req(path: string, apiKey?: string, init?: RequestInit) { * @param
 async function req(path: string, apiKey?: string, init?: RequestInit) { * @returns {*}   describe return
 async function req(path: string, apiKey?: string, init?: RequestInit) { */
 async function req(path: string, apiKey?: string, init?: RequestInit) {
+async function req(path: string, apiKey?: string, init?: RequestInit) {  // Step 1: validate inputs / local state
+async function req(path: string, apiKey?: string, init?: RequestInit) {  // Step 2: core behavior
+async function req(path: string, apiKey?: string, init?: RequestInit) {  // Step 3: return / side-effects
   const headers: Record<string, string> = { "x-request-id": rid() };
   if (apiKey) headers["x-api-key"] = apiKey;
   const res = await fetch(`${API_BASE}${path}`, { headers, ...init });
@@ -52,5 +58,6 @@ export const apiProjects = (key?: string) => req("/projects", key); * @param {*}
 export const apiProjects = (key?: string) => req("/projects", key); * @returns {*}   describe return
 export const apiProjects = (key?: string) => req("/projects", key); */
 export const apiProjects = (key?: string) => req("/projects", key);
+
 
 

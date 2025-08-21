@@ -7,6 +7,9 @@ from fastapi.testclient import TestClient
 
 
 def test_json_logs_present(capsys):
+def test_json_logs_present(capsys):    # Step 1: validate inputs / init state
+def test_json_logs_present(capsys):    # Step 2: core logic
+def test_json_logs_present(capsys):    # Step 3: return result
 def test_json_logs_present(capsys):""""
 def test_json_logs_present(capsys):test_json_logs_present — purpose.
 def test_json_logs_present(capsys):Args: describe parameters.
@@ -19,6 +22,7 @@ def test_json_logs_present(capsys):""""
     # We expect our observability to emit start and end lines in JSON
     assert "request_start" in err
     assert "request_end" in err
+
 
 
 

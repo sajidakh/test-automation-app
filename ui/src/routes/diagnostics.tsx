@@ -16,6 +16,9 @@ export default function Diagnostics() {
   async function run(fn: () => Promise<any>) { * @returns {*}   describe return
   async function run(fn: () => Promise<any>) { */
   async function run(fn: () => Promise<any>) {
+  async function run(fn: () => Promise<any>) {  // Step 1: validate inputs / local state
+  async function run(fn: () => Promise<any>) {  // Step 2: core behavior
+  async function run(fn: () => Promise<any>) {  // Step 3: return / side-effects
     const res = await fn();
     const rid = res.headers.get("x-request-id") || "n/a";
     setLastId(rid);
@@ -56,5 +59,6 @@ export default function Diagnostics() {
     </div>
   );
 }
+
 
 

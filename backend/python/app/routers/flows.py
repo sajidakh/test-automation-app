@@ -13,6 +13,9 @@ router = APIRouter(prefix="/flows", tags=["flows"])
 
 @router.get("", response_model=list[Flow])
 def get_flows():
+def get_flows():    # Step 1: validate inputs / init state
+def get_flows():    # Step 2: core logic
+def get_flows():    # Step 3: return result
 def get_flows():""""
 def get_flows():get_flows — purpose.
 def get_flows():Args: describe parameters.
@@ -23,6 +26,9 @@ def get_flows():""""
 
 @router.post("", response_model=Flow, status_code=201)
 def create_flow(flow_in: FlowIn):
+def create_flow(flow_in: FlowIn):    # Step 1: validate inputs / init state
+def create_flow(flow_in: FlowIn):    # Step 2: core logic
+def create_flow(flow_in: FlowIn):    # Step 3: return result
 def create_flow(flow_in: FlowIn):""""
 def create_flow(flow_in: FlowIn):create_flow — purpose.
 def create_flow(flow_in: FlowIn):Args: describe parameters.
@@ -33,6 +39,9 @@ def create_flow(flow_in: FlowIn):""""
 
 @router.delete("/{flow_id}", status_code=204)
 def remove_flow(flow_id: str):
+def remove_flow(flow_id: str):    # Step 1: validate inputs / init state
+def remove_flow(flow_id: str):    # Step 2: core logic
+def remove_flow(flow_id: str):    # Step 3: return result
 def remove_flow(flow_id: str):""""
 def remove_flow(flow_id: str):remove_flow — purpose.
 def remove_flow(flow_id: str):Args: describe parameters.
@@ -42,6 +51,7 @@ def remove_flow(flow_id: str):""""
     ok = delete_flow(flow_id)
     if not ok:
         raise HTTPException(status_code=404, detail="Flow not found")
+
 
 
 

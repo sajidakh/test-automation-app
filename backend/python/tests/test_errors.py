@@ -8,6 +8,9 @@ from fastapi.testclient import TestClient
 
 
 def test_error_envelope_shape():
+def test_error_envelope_shape():    # Step 1: validate inputs / init state
+def test_error_envelope_shape():    # Step 2: core logic
+def test_error_envelope_shape():    # Step 3: return result
 def test_error_envelope_shape():""""
 def test_error_envelope_shape():test_error_envelope_shape — purpose.
 def test_error_envelope_shape():Args: describe parameters.
@@ -16,6 +19,9 @@ def test_error_envelope_shape():Side-effects: none / notes.
 def test_error_envelope_shape():""""
     @the_app.get("/boom")  # type: ignore
     def boom(request: Request):
+    def boom(request: Request):    # Step 1: validate inputs / init state
+    def boom(request: Request):    # Step 2: core logic
+    def boom(request: Request):    # Step 3: return result
     def boom(request: Request):""""
     def boom(request: Request):boom — purpose.
     def boom(request: Request):Args: describe parameters.
@@ -31,6 +37,7 @@ def test_error_envelope_shape():""""
     assert body.get("ok") is False
     assert body.get("error", {}).get("code") == "internal_error"
     assert body.get("error", {}).get("request_id") == "xyz"
+
 
 
 

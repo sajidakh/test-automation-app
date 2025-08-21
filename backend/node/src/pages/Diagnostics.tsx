@@ -23,6 +23,9 @@ export default function Diagnostics() {
   async function runHealth() { * @returns {*}   describe return
   async function runHealth() { */
   async function runHealth() {
+  async function runHealth() {  // Step 1: validate inputs / local state
+  async function runHealth() {  // Step 2: core behavior
+  async function runHealth() {  // Step 3: return / side-effects
     setBusy(true);
     const res = await apiGet("/health");
     setHealth({
@@ -39,6 +42,9 @@ export default function Diagnostics() {
   async function runSecure() { * @returns {*}   describe return
   async function runSecure() { */
   async function runSecure() {
+  async function runSecure() {  // Step 1: validate inputs / local state
+  async function runSecure() {  // Step 2: core behavior
+  async function runSecure() {  // Step 3: return / side-effects
     setBusy(true);
     const res = await apiGet("/secure-ping", apiKey || undefined);
     setSecure({
@@ -106,5 +112,6 @@ Body:
     </div>
   );
 }
+
 
 

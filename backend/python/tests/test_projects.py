@@ -7,6 +7,9 @@ from main import app
 
 
 def test_projects_requires_key():
+def test_projects_requires_key():    # Step 1: validate inputs / init state
+def test_projects_requires_key():    # Step 2: core logic
+def test_projects_requires_key():    # Step 3: return result
 def test_projects_requires_key():""""
 def test_projects_requires_key():test_projects_requires_key — purpose.
 def test_projects_requires_key():Args: describe parameters.
@@ -18,6 +21,9 @@ def test_projects_requires_key():""""
     assert r.status_code == 401
 
 def test_projects_ok_with_key(monkeypatch):
+def test_projects_ok_with_key(monkeypatch):    # Step 1: validate inputs / init state
+def test_projects_ok_with_key(monkeypatch):    # Step 2: core logic
+def test_projects_ok_with_key(monkeypatch):    # Step 3: return result
 def test_projects_ok_with_key(monkeypatch):""""
 def test_projects_ok_with_key(monkeypatch):test_projects_ok_with_key — purpose.
 def test_projects_ok_with_key(monkeypatch):Args: describe parameters.
@@ -35,6 +41,7 @@ def test_projects_ok_with_key(monkeypatch):""""
     data = r.json()
     assert "items" in data and isinstance(data["items"], list)
     assert data["count"] == len(data["items"])
+
 
 
 
