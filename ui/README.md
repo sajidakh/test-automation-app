@@ -1,2 +1,6 @@
 # ui (Vite + React)
-Dev harness to ping API endpoints; logs timings in the console.
+Dev harness with four buttons:
+- **Health** → GET /health (200)
+- **Secure** → GET /secure-ping (requires `x-api-key`)
+- **404** → GET /does-not-exist
+- **Clear** → clears console log area

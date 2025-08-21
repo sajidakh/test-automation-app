@@ -1,2 +1,2 @@
 # services
-Business logic goes here. Avoid HTTP/web concerns. Pure functions => easy tests.
+Business logic. Keep functions small and pure; easy to test. No HTTP concerns here.
